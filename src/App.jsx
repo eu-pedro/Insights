@@ -1,10 +1,12 @@
-
+import Logo from './assets/Logo.png'
 
 function App() {
  
 
   return (
-    <h1>olá</h1>
+    <header>
+      <img src={Logo} alt="Logo insights" />
+    </header>
   )
 }
 
