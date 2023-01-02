@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { 
   TitleContent,
   SectionCards,
@@ -8,27 +8,34 @@ import {
 
 const SectionContainer = ({title}) => {
 
-  const [contentInsights, setContentInsights] = useState([]);
+  const [arrInsights, setArrInsights] = useState([])
 
-  const getItem = () => {
-    
-    const item = localStorage.getItem('title')
-    console.log(item)
-    
-  }
+  useEffect(() => {
+    setArrInsights(JSON.parse(localStorage.getItem('title')))
+  }, [])
 
-  getItem();
+  
+
+  
+  
+  
 
   return (
-    <>
-      <TitleContent>{title}</TitleContent>
-      <SectionCards>
-        <Card>
-          <ContentCard>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum in nesciunt quae! Atque eveniet quisquam ut iusto, laudantium possimus ad distinctio sequi rerum.</ContentCard>
-        </Card>
-        
-      </SectionCards>
-    </>
+    
+      
+        <>
+        <TitleContent>{title}</TitleContent>
+        <SectionCards>
+          {arrInsights?.map((item, index) => (
+            <Card key={index}>
+              <ContentCard>{item}</ContentCard>
+            </Card>
+          ))}
+          
+        </SectionCards>
+        </>
+  
+    
   )
 }
 

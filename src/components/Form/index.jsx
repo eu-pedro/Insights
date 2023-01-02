@@ -14,18 +14,24 @@ import {
 const Form = ({contentLabel}) => {
 
   const [insights, setInsights] = useState("")
-  const [myArray] = useState([])
+  
+  let arr = [];
 
   const handleInsights = (e) => {
     e.preventDefault();
 
     if (insights === "" || insights === undefined) return;
-
-    myArray.push(insights)
-    console.log(myArray)
     
-    localStorage.setItem('title', myArray)
-  
+
+    if(localStorage.title){
+      arr = JSON.parse(localStorage.getItem('title'))
+    }
+
+
+    arr.push(insights)
+    localStorage.title = JSON.stringify(arr)
+    alert('Card adicionado com sucesso!')
+    document.location.reload(true);
   }
 
   
