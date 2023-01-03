@@ -1,9 +1,14 @@
 import styled, { css } from "styled-components";
 
+export const FormContainer = styled.form`
+  width: 100%;
+`
+
 export const Label = styled.label`
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
+  width: 100%;
   line-height: 27px;
   color: #fff;
   display: block;
@@ -13,7 +18,7 @@ export const Label = styled.label`
 export const ContentContainer = styled.section`
   display: flex;
 
-  width: 500px;
+  width: 100%;
   height: 100px;
   background: #444444;
   border-radius: 24px;
@@ -27,6 +32,7 @@ export const Button = styled.button`
   background-color: #FFD131;
   margin: auto 12px;
   cursor: pointer;
+  padding: 20px;
 
   position: relative;
   transition: all .5s ease-in-out;
@@ -58,7 +64,7 @@ export const Row = styled.div`
 
 export const Input = styled.input`
   background: #262626;
-  width: 394px;
+  width: 100%;
   height: 46px;
   border: 2px solid #696969;
   border-radius: 8px;

@@ -1,24 +1,33 @@
 import { useEffect, useState } from 'react'
+import Modal from '../Modal';
 import { 
   TitleContent,
   SectionCards,
   Card,
-  ContentCard
+  ContentCard,
+  ContentDate
  } from './styles'
 
 const SectionContainer = ({title}) => {
 
   const [arrInsights, setArrInsights] = useState([])
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     setArrInsights(JSON.parse(localStorage.getItem('title')))
   }, [])
 
-  const randomId = () => {
-    
-  }
-
+  const options = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  let date = new Date().toLocaleDateString('pt-br', options);
   
+  const formatMounth = date.split("de")[1].slice(0,4)
+  const formatDate = `${date.split("de")[0].trim()}/${formatMounth.trim()}/${date.split("de")[2].trim()}`
+
+ 
   const randomBgColor = () => {
     const randomColor = [
       {id: 1, background: '#D00000'},
@@ -31,26 +40,28 @@ const SectionContainer = ({title}) => {
     ]
     
     const id = Math.floor(Math.random() * randomColor.length)
-    console.log(id)
-    const result = randomColor.filter((item) => item.id === id)
-    const bg = result[0]
-    return bg
+    const bg = randomColor[id]
+    return bg.background
   }
   
+  const closeModal = () => {
+    setIsOpen(false)
+  }
   
-  
-  
-  
+  console.log(arrInsights[0])
 
+  
   return (
-    
-      
         <>
+        {isOpen && (
+          <Modal closeModal={closeModal} bgAlert={randomBgColor}/>
+        )}
         <TitleContent>{title}</TitleContent>
         <SectionCards>
           {arrInsights?.map((item, index) => (
-            <Card key={index} background={randomBgColor()}>
+            <Card key={index} background={randomBgColor} onClick={()=> setIsOpen(true)}>
               <ContentCard>{item}</ContentCard>
+              <ContentDate>{formatDate}</ContentDate>
             </Card>
           ))}
           
