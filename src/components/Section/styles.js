@@ -23,7 +23,7 @@ export const SectionCards = styled.section`
 export const Card = styled.section`
   max-width: 230px;
   max-height: auto;
-  background: #D00000;
+  background: ${props => props.background};
   border-radius: 10px;
   width: 232px;
 `
