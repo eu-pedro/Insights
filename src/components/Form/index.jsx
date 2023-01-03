@@ -7,7 +7,8 @@ import {
   ContentContainer,
   Button,
   Row,
-  Input
+  Input, 
+  FormContainer
  } from './styles'
 
 
@@ -18,6 +19,7 @@ const Form = ({contentLabel}) => {
   let arr = [];
 
   const handleInsights = (e) => {
+
     e.preventDefault();
 
     if (insights === "" || insights === undefined) return;
@@ -39,7 +41,7 @@ const Form = ({contentLabel}) => {
 
 
   return (
-    <form onSubmit={handleInsights}>
+    <FormContainer onSubmit={handleInsights}>
       <Label>{contentLabel}</Label>
 
       <ContentContainer>
@@ -50,7 +52,7 @@ const Form = ({contentLabel}) => {
         </Button>
       </ContentContainer>
       
-    </form>
+    </FormContainer>
   )
 }
 
