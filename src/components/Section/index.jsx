@@ -17,6 +17,7 @@ const SectionContainer = ({title}) => {
     setArrInsights(JSON.parse(localStorage.getItem('title')))
   }, [])
 
+<<<<<<< HEAD
   const options = {
     year: "numeric",
     month: "long",
@@ -27,6 +28,8 @@ const SectionContainer = ({title}) => {
   const formatMounth = date.split("de")[1].slice(0,4)
   const formatDate = `${date.split("de")[0].trim()}/${formatMounth.trim()}/${date.split("de")[2].trim()}`
 
+=======
+>>>>>>> 707bea68fdf6db7d4007875d6d23149c8a73be35
  
   const randomBgColor = () => {
     const randomColor = [
@@ -48,8 +51,21 @@ const SectionContainer = ({title}) => {
     setIsOpen(false)
   }
   
+<<<<<<< HEAD
   console.log(arrInsights[0])
 
+=======
+  const options = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  let date = new Date().toLocaleDateString('pt-br', options);
+  
+  console.log(date.split("de"))
+  const formatMounth = date.split("de")[1].slice(0,4)
+  const formatDate = `${date.split("de")[0].trim()}/${formatMounth.trim()}/${date.split("de")[2].trim()}`
+>>>>>>> 707bea68fdf6db7d4007875d6d23149c8a73be35
   
   return (
         <>
