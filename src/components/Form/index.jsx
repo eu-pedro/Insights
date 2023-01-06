@@ -1,59 +1,86 @@
 // import useState
-import { useState } from 'react';
+import { useState } from 'react'
 
-
-import { 
+import {
   Label,
   ContentContainer,
   Button,
   Row,
-  Input, 
+  Input,
   FormContainer
- } from './styles'
+} from './styles'
 
+const Form = ({ contentLabel }) => {
+  const [titleInsights, setTitleInsights] = useState('')
 
-const Form = ({contentLabel}) => {
-
-  const [insights, setInsights] = useState("")
   
-  let arr = [];
 
-  const handleInsights = (e) => {
+  const handleInsights = e => {
+    let insights = new Array();
 
-    e.preventDefault();
+    e.preventDefault()
 
-    if (insights === "" || insights === undefined) return;
-    
+    if (insights === '' || insights === undefined) return
 
-    if(localStorage.title){
-      arr = JSON.parse(localStorage.getItem('title'))
+    const handleDate = () => {
+      const options = {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      }
+
+      let date = new Date().toLocaleDateString('pt-br', options)
+
+      const formatMounth = date.split('de')[1].slice(0, 4)
+      const formatDate = `${date
+        .split('de')[0]
+        .trim()}/${formatMounth.trim()}/${date.split('de')[2].trim()}`
+      return formatDate;
     }
 
+    const randomBgColor = () => {
+      const randomColor = [
+        { id: 1, background: '#D00000' },
+        { id: 2, background: '#FFBA08' },
+        { id: 3, background: '#3F88C5' },
+        { id: 4, background: '#FF499E' },
+        { id: 5, background: '#712F79' },
+        { id: 6, background: '#226F54' },
+        { id: 7, background: '#7A542E' }
+      ]
 
-    arr.push(insights)
-    localStorage.title = JSON.stringify(arr)
-    alert('Card adicionado com sucesso!')
-    document.location.reload(true);
+      const id = Math.floor(Math.random() * randomColor.length)
+      const bg = randomColor[id]
+      return bg.background
+    }
+
+    
+    if(localStorage.card){
+      insights = JSON.parse(localStorage.getItem("card"))
+    }
+
+    insights.push({
+      title: titleInsights,
+      date: handleDate(),
+      bgColor: randomBgColor()
+    })
+    
+    localStorage.setItem('card', JSON.stringify(insights))
   }
-
-  
-
-
 
   return (
     <FormContainer onSubmit={handleInsights}>
       <Label>{contentLabel}</Label>
 
       <ContentContainer>
-        <Input type={'text'} onChange={(e)=> setInsights(e.target.value)}/>
+        <Input type={'text'} onChange={e => setTitleInsights(e.target.value)} />
         <Button>
-          <Row position={'vertical'}/>
-          <Row position={'horizontal'}/>
+          <Row position={'vertical'} />
+          <Row position={'horizontal'} />
         </Button>
       </ContentContainer>
-      
     </FormContainer>
   )
 }
 
-export default Form;
+export default Form

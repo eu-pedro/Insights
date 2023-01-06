@@ -6,9 +6,9 @@ import {
 
  import Close from '../../assets/X.png'
 
-const Modal = ({closeModal, bgAlert}) => {
+const Modal = ({closeModal, bgColor}) => {
   return (
-    <Alert bgAlert={bgAlert}>
+    <Alert bgColor={bgColor}>
       <CloseButton src={Close} alt='close button' onClick={closeModal}/>
       <ModalContent>Conteudo</ModalContent>
     </Alert>

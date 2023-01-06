@@ -24,14 +24,11 @@ export const Card = styled.section`
   background: ${props => props.background};
   border-radius: 10px;
   padding: 25px 16px;
-<<<<<<< HEAD
+
   &:hover{
     cursor: pointer;
   }
-=======
->>>>>>> 707bea68fdf6db7d4007875d6d23149c8a73be35
 `
-
 export const ContentCard = styled.p`
   font-style: normal;
   font-weight: 400;

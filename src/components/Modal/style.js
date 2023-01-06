@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Alert = styled.div`
-  background-color: ${props => props.bgAlert};
+  background-color: ${props => props.bgColor};
   position: absolute;
   bottom: 1px;
   width: 100%;
