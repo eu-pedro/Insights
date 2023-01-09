@@ -10,12 +10,19 @@ import {
   FormContainer
 } from './styles'
 
+
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+
+
 const Form = ({ contentLabel }) => {
   const [titleInsights, setTitleInsights] = useState('')
 
+  const notify = () => toast("Insight adicionado com sucesso!")
   
 
   const handleInsights = e => {
+    
     let insights = new Array();
 
     e.preventDefault()
@@ -66,6 +73,7 @@ const Form = ({ contentLabel }) => {
     })
     
     localStorage.setItem('card', JSON.stringify(insights))
+    notify();
   }
 
   return (
@@ -78,8 +86,12 @@ const Form = ({ contentLabel }) => {
           <Row position={'vertical'} />
           <Row position={'horizontal'} />
         </Button>
+        
       </ContentContainer>
+
+      <ToastContainer/>
     </FormContainer>
+    
   )
 }
 

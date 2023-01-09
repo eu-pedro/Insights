@@ -5,41 +5,59 @@ import {
   SectionCards,
   Card,
   ContentCard,
-  ContentDate
+  ContentDate,
+  MessageNoContent
 } from './styles'
 
 const SectionContainer = ({ title }) => {
-  const [arrInsights, setArrInsights] = useState([])
+
+  const [message, setMessage] = useState("Você não possui nenhum insight")
+  const [insights, setInsights] = useState([])
   const [isOpen, setIsOpen] = useState(false)
+  const [background, setBackground] = useState("") 
+  const [titleInsights, setTitleInsights] = useState("")
+  const [date, setDate] = useState("")
 
   useEffect(() => {
-    setArrInsights(JSON.parse(localStorage.getItem('card')))
+    setInsights(JSON.parse(localStorage.getItem('card')))
   }, [])
 
 
   const closeModal = () => {
     setIsOpen(false)
   }
-
   
 
+  const handleContent = (item) => {
+    setTitleInsights(item.title)
+    setBackground(item.bgColor)
+    setDate(item.date)
+    setIsOpen(true)
+   }
+
   return (
-    <>
-      {isOpen && <Modal closeModal={closeModal} bgColor={'red'}/>}
-      <TitleContent>{title}</TitleContent>
-      <SectionCards>
-        {arrInsights?.map((item, index) => (
-          <Card
-            background={item.bgColor}
-            key={index}
-            onClick={() => setIsOpen(true)}
-          >
-            <ContentCard>{item.title}</ContentCard>
-            <ContentDate>{item.date}</ContentDate>
-          </Card>
-        ))}
-      </SectionCards>
-    </>
+   
+      !!insights ? (
+        <>
+          {isOpen && <Modal closeModal={closeModal} background={background} title={titleInsights} date={date}/>}
+          <TitleContent>{title}</TitleContent>
+          <SectionCards>
+            {insights?.map((item, index) => (
+              <Card
+                background={item.bgColor}
+                key={index}
+                onClick={()=> handleContent(item)}
+              >
+                <ContentCard>{item.title}</ContentCard>
+                <ContentDate>{item.date}</ContentDate>
+              </Card>
+            ))}
+          </SectionCards>
+        </>
+      ) : (
+        <MessageNoContent>{message}</MessageNoContent>
+      ) 
+    
   )
 }
 

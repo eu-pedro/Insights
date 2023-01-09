@@ -45,3 +45,8 @@ export const ContentDate = styled.p`
   font-size: 12px;
   color: #FFFFFF;
 `
+
+export const MessageNoContent = styled.span`
+  color: white;
+  padding-top: 60px;
+`
