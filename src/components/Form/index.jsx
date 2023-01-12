@@ -1,5 +1,5 @@
 // import useState
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import {
   Label,
@@ -10,24 +10,21 @@ import {
   FormContainer
 } from './styles'
 
+import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer, toast } from 'react-toastify'
 
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer, toast } from 'react-toastify';
-
-
-const Form = ({ contentLabel }) => {
+const Form = ({ contentLabel, callbackParent}) => {
+  const [object, setObject] = useState([])
   const [titleInsights, setTitleInsights] = useState('')
 
-  const notify = () => toast("Insight adicionado com sucesso!")
-  
+
+  const notify = () => toast('Insight adicionado com sucesso!')
 
   const handleInsights = e => {
-    
-    let insights = new Array();
-
+    callbackParent(true)
     e.preventDefault()
 
-    if (insights === '' || insights === undefined) return
+    // if (insights === '' || insights === undefined) return
 
     const handleDate = () => {
       const options = {
@@ -42,7 +39,7 @@ const Form = ({ contentLabel }) => {
       const formatDate = `${date
         .split('de')[0]
         .trim()}/${formatMounth.trim()}/${date.split('de')[2].trim()}`
-      return formatDate;
+      return formatDate
     }
 
     const randomBgColor = () => {
@@ -61,37 +58,48 @@ const Form = ({ contentLabel }) => {
       return bg.background
     }
 
-    
-    if(localStorage.card){
-      insights = JSON.parse(localStorage.getItem("card"))
-    }
+    let test = [
+      ...object, 
+      {
+        title: titleInsights,
+        date: handleDate(),
+        bgColor: randomBgColor()
+      }
+    ]
 
-    insights.push({
-      title: titleInsights,
-      date: handleDate(),
-      bgColor: randomBgColor()
-    })
-    
-    localStorage.setItem('card', JSON.stringify(insights))
-    notify();
+
+
+    setObject(prevObject => [
+      ...prevObject,
+      {
+        title: titleInsights,
+        date: handleDate(),
+        bgColor: randomBgColor()
+      }
+    ])
+
+    localStorage.setItem('card', JSON.stringify(test))
+    // console.log(localStorage.getItem('card'))
   }
+
+  // useEffect(() => {
+    
+  // }, [object])
 
   return (
     <FormContainer onSubmit={handleInsights}>
       <Label>{contentLabel}</Label>
 
       <ContentContainer>
-        <Input type={'text'} onChange={e => setTitleInsights(e.target.value)} />
+        <Input type={'text'} onChange={e => setTitleInsights(e.target.value)} value={titleInsights}/>
         <Button>
           <Row position={'vertical'} />
           <Row position={'horizontal'} />
         </Button>
-        
       </ContentContainer>
 
-      <ToastContainer/>
+      <ToastContainer />
     </FormContainer>
-    
   )
 }
 

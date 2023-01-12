@@ -9,19 +9,23 @@ import {
   MessageNoContent
 } from './styles'
 
-const SectionContainer = ({ title }) => {
+const SectionContainer = ({ title, valueType }) => {
 
-  const [message, setMessage] = useState("Você não possui nenhum insight")
   const [insights, setInsights] = useState([])
+  const [message, setMessage] = useState("Você não possui nenhum insight")
   const [isOpen, setIsOpen] = useState(false)
   const [background, setBackground] = useState("") 
   const [titleInsights, setTitleInsights] = useState("")
   const [date, setDate] = useState("")
 
+  
   useEffect(() => {
     setInsights(JSON.parse(localStorage.getItem('card')))
-  }, [])
-
+    console.log(valueType)
+  }, [insights])
+  
+  
+  // console.log(localStorage.getItem('card'))
 
   const closeModal = () => {
     setIsOpen(false)
