@@ -17,12 +17,14 @@ const SectionContainer = ({ title, valueType }) => {
   const [background, setBackground] = useState("") 
   const [titleInsights, setTitleInsights] = useState("")
   const [date, setDate] = useState("")
-
+  const [value, setValue ] = useState({});
   
   useEffect(() => {
     setInsights(JSON.parse(localStorage.getItem('card')))
-    console.log(valueType)
-  }, [insights])
+    console.log("Call",valueType)
+    setValue(valueType)
+    console.log(value)
+  }, [value === valueType])
   
   
   // console.log(localStorage.getItem('card'))

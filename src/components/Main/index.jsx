@@ -7,7 +7,7 @@ import { MainContainer } from './styles'
 
 const Main = () => {
 
-  const [value, setValue] = useState(false);
+  const [value, setValue] = useState({});
 
   const handleValue = (state) => {
     console.log('entrou', state)

@@ -21,7 +21,7 @@ const Form = ({ contentLabel, callbackParent}) => {
   const notify = () => toast('Insight adicionado com sucesso!')
 
   const handleInsights = e => {
-    callbackParent(true)
+    
     e.preventDefault()
 
     // if (insights === '' || insights === undefined) return
@@ -66,9 +66,7 @@ const Form = ({ contentLabel, callbackParent}) => {
         bgColor: randomBgColor()
       }
     ]
-
-
-
+    callbackParent(test)
     setObject(prevObject => [
       ...prevObject,
       {
