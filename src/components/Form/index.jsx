@@ -13,15 +13,13 @@ import {
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer, toast } from 'react-toastify'
 
-const Form = ({ contentLabel, callbackParent}) => {
+const Form = ({ contentLabel, callbackParent }) => {
   const [object, setObject] = useState([])
   const [titleInsights, setTitleInsights] = useState('')
-
 
   const notify = () => toast('Insight adicionado com sucesso!')
 
   const handleInsights = e => {
-    
     e.preventDefault()
 
     // if (insights === '' || insights === undefined) return
@@ -59,7 +57,7 @@ const Form = ({ contentLabel, callbackParent}) => {
     }
 
     let test = [
-      ...object, 
+      ...object,
       {
         title: titleInsights,
         date: handleDate(),
@@ -77,19 +75,18 @@ const Form = ({ contentLabel, callbackParent}) => {
     ])
 
     localStorage.setItem('card', JSON.stringify(test))
-    // console.log(localStorage.getItem('card'))
   }
-
-  // useEffect(() => {
-    
-  // }, [object])
 
   return (
     <FormContainer onSubmit={handleInsights}>
       <Label>{contentLabel}</Label>
 
       <ContentContainer>
-        <Input type={'text'} onChange={e => setTitleInsights(e.target.value)} value={titleInsights}/>
+        <Input
+          type={'text'}
+          onChange={e => setTitleInsights(e.target.value)}
+          value={titleInsights}
+        />
         <Button>
           <Row position={'vertical'} />
           <Row position={'horizontal'} />
