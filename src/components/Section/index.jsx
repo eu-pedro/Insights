@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 import Modal from '../Modal'
 import {
   TitleContent,
@@ -8,26 +8,26 @@ import {
   ContentDate,
   MessageNoContent
 } from './styles'
+import { useContext } from 'react'
+import { InsightsContext } from '../../context/InsightsContext'
 
-const SectionContainer = ({ title, valueType }) => {
+const SectionContainer = ({ title }) => {
+  
 
-  const [insights, setInsights] = useState([])
+  const [insightsCards, setInsightsCards] = useState([])
   const [message, setMessage] = useState("Você não possui nenhum insight")
   const [isOpen, setIsOpen] = useState(false)
   const [background, setBackground] = useState("") 
   const [titleInsights, setTitleInsights] = useState("")
   const [date, setDate] = useState("")
-  const [value, setValue ] = useState({});
   
-  useEffect(() => {
-    setInsights(JSON.parse(localStorage.getItem('card')))
-    console.log("Call",valueType)
-    setValue(valueType)
-    console.log(value)
-  }, [value === valueType])
+  const { insights, setInsights } = useContext(InsightsContext)
+
+  useEffect(()=> {
+    console.log(insights)
+  }, [])
   
   
-  // console.log(localStorage.getItem('card'))
 
   const closeModal = () => {
     setIsOpen(false)
@@ -43,12 +43,12 @@ const SectionContainer = ({ title, valueType }) => {
 
   return (
    
-      !!insights ? (
+      !!insightsCards ? (
         <>
           {isOpen && <Modal closeModal={closeModal} background={background} title={titleInsights} date={date}/>}
           <TitleContent>{title}</TitleContent>
           <SectionCards>
-            {insights?.map((item, index) => (
+            {insightsCards?.map((item, index) => (
               <Card
                 background={item.bgColor}
                 key={index}

@@ -1,27 +1,84 @@
-import { useState } from 'react'
-import Form from '../Form/index'
-import SectionContainer from '../Section'
+import Form from "../Form/index";
+import SectionContainer from "../Section";
+import { InsightsContext } from "../../context/InsightsContext";
 
-
-import { MainContainer } from './styles'
+import { MainContainer } from "./styles";
+import { useState } from 'react';
 
 const Main = () => {
 
-  const [value, setValue] = useState({});
+  const [insights, setInsights] = useState('')
 
-  const handleValue = (state) => {
-    console.log('entrou', state)
-    setValue(state)
+  const handleDate = () => {
+    const options = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    }
+
+    let date = new Date().toLocaleDateString('pt-br', options)
+
+    const formatMounth = date.split('de')[1].slice(0, 4)
+    const formatDate = `${date
+      .split('de')[0]
+      .trim()}/${formatMounth.trim()}/${date.split('de')[2].trim()}`
+    return formatDate
   }
 
-  return (
-    <MainContainer>
-      <Form contentLabel={'Descreva seu insights:'} callbackParent={(state)=> handleValue(state)}/>
-      <SectionContainer title={'Lista dos seus insights:'} valueType={value}/>
-    </MainContainer>
+  const randomBgColor = () => {
+    const randomColor = [
+      { id: 1, background: '#D00000' },
+      { id: 2, background: '#FFBA08' },
+      { id: 3, background: '#3F88C5' },
+      { id: 4, background: '#FF499E' },
+      { id: 5, background: '#712F79' },
+      { id: 6, background: '#226F54' },
+      { id: 7, background: '#7A542E' }
+    ]
 
-    
-  )
-}
+    const id = Math.floor(Math.random() * randomColor.length)
+    const bg = randomColor[id]
+    return bg.background
+  }
+
+  const shareTitleInsights = (titleInsights) => {
+    let test = [
+      ...insights,
+      {
+        title: titleInsights,
+        date: handleDate(),
+        bgColor: randomBgColor()
+      }
+    ]
+  
+    setInsights(prevObject => [
+      ...prevObject,
+      {
+        title: titleInsights,
+        date: handleDate(),
+        bgColor: randomBgColor()
+      }
+    ])
+
+    localStorage.setItem('card', JSON.stringify(test))
+
+  }
+  
+  
+  
+  return (
+    <InsightsContext.Provider value={{insights, setInsights}}>
+      <MainContainer>
+        <Form
+          contentLabel={"Descreva seu insights:"}
+          showInsights={(titleInsights)=> shareTitleInsights(titleInsights)}
+        />
+        <SectionContainer
+          title={"Lista dos seus insights:"}
+        />
+      </MainContainer>
+    </InsightsContext.Provider>
+  );
+};
 
 export default Main;
