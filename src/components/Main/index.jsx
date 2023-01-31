@@ -4,10 +4,11 @@ import { InsightsContext } from "../../context/InsightsContext";
 
 import { MainContainer } from "./styles";
 import { useState } from 'react';
+import { useEffect } from 'react';
 
 const Main = () => {
 
-  const [insights, setInsights] = useState('')
+  const [insights, setInsights] = useState([])
 
   const handleDate = () => {
     const options = {
@@ -42,6 +43,7 @@ const Main = () => {
   }
 
   const shareTitleInsights = (titleInsights) => {
+    console.log(insights)
     let test = [
       ...insights,
       {
@@ -50,19 +52,20 @@ const Main = () => {
         bgColor: randomBgColor()
       }
     ]
-  
-    setInsights(prevObject => [
-      ...prevObject,
+    setInsights([
+      ...insights,
       {
         title: titleInsights,
         date: handleDate(),
         bgColor: randomBgColor()
-      }
+      },
+      ...insights
     ])
-
+  
     localStorage.setItem('card', JSON.stringify(test))
 
   }
+
   
   
   
@@ -70,7 +73,7 @@ const Main = () => {
     <InsightsContext.Provider value={{insights, setInsights}}>
       <MainContainer>
         <Form
-          contentLabel={"Descreva seu insights:"}
+          contentLabel="Descreva seu insights:"
           showInsights={(titleInsights)=> shareTitleInsights(titleInsights)}
         />
         <SectionContainer
