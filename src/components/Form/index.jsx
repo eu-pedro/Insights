@@ -13,7 +13,7 @@ import {
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer, toast } from 'react-toastify'
 
-const Form = ({ contentLabel, showInsights }) => {
+const Form = ({ contentLabel }) => {
   const [titleInsights, setTitleInsights] = useState('')
 
   const notify = () => toast('Insight adicionado com sucesso!')
@@ -23,7 +23,6 @@ const Form = ({ contentLabel, showInsights }) => {
     if(titleInsights === null || titleInsights === ""){
       return
     }
-    showInsights(titleInsights);
   }
 
   return (
