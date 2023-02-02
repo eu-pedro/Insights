@@ -22,15 +22,12 @@ const SectionContainer = ({ title }) => {
   const { insights, setInsights } = useContext(InsightsContext);
 
   useEffect(() => {
-    console.log(insights)
-    if (insights.length === 0) {
-      setInsightsCards(JSON.parse(localStorage.getItem('card')))
-      setInsights(JSON.parse(localStorage.getItem('card')))
-    }
-    else {
-      setInsightsCards(insights)
-    }
-  }, [insights]);
+    const data = JSON.parse(localStorage.getItem('card'))
+    console.log(data)
+    if (data) {
+      setInsights(data)
+    } 
+  }, []);
 
   const closeModal = () => {
     setIsOpen(false);
@@ -55,7 +52,7 @@ const SectionContainer = ({ title }) => {
       )}
       <TitleContent>{title}</TitleContent>
       <SectionCards>
-        {insightsCards?.map((item, index) => (
+        {insights?.map((item, index) => (
           <Card
             background={item.bgColor}
             key={index}

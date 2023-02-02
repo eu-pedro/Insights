@@ -4,12 +4,8 @@ export const InsightsContext = createContext();
 
 export function InsightsContextProvider({ children }) {
 
-  const [insights, setInsights] = useState([{
-    title: 'Olá',
-    date: handleDate(),
-    bgColor: randomBgColor()
-  }])
-
+  const [insights, setInsights] = useState([])
+  
   const handleDate = () => {
     const options = {
       year: 'numeric',
@@ -26,7 +22,7 @@ export function InsightsContextProvider({ children }) {
     return formatDate
   }
 
-  const randomBgColor = () => {
+   const randomBgColor = () => {
     const randomColor = [
       { id: 1, background: '#D00000' },
       { id: 2, background: '#FFBA08' },
@@ -36,17 +32,15 @@ export function InsightsContextProvider({ children }) {
       { id: 6, background: '#226F54' },
       { id: 7, background: '#7A542E' }
     ]
-    
+
     const id = Math.floor(Math.random() * randomColor.length)
     const bg = randomColor[id]
     return bg.background
   }
-
-
   
-
+  
   return (
-    <InsightsContext.Provider value={{insights, setInsights}}>
+    <InsightsContext.Provider value={{ insights, setInsights, handleDate, randomBgColor }}>
       {children}
     </InsightsContext.Provider>
   )
