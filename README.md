@@ -24,11 +24,11 @@ Obter o link do repositório do git
 ```
 
 ```
-Em seu terminal de comando, executar # git clone (url do projeto) #
+Em seu terminal de comando, executar  *git clone (url do projeto)*
 ```
 
 ```
-Rodar um ** npm install ** e depois ** npm run dev **
+Rodar um *npm install* e depois *npm run dev*
 ```
 
 
