@@ -1,4 +1,4 @@
-# Starbucks Landing Page
+# Insights
 
 Projeto insights, guarde sua ideia em post's!
 
@@ -24,7 +24,7 @@ Obter o link do repositório do git
 ```
 
 ```
-Em seu terminal de comando, executar  *git clone (url do projeto)*
+Em seu terminal de comando, executar  *https://github.com/eu-pedro/Insights.git*
 ```
 
 ```
@@ -35,8 +35,8 @@ Rodar um *npm install* e depois *npm run dev*
 
 ## 🛠️ Construído com
 
-* [React](https://pt-br.reactjs.org/docs/getting-started.html) - Linguagem de Marcação
-* [Styled Components](https://styled-components.com/docs) - Linguagem de Estilização
+* [React](https://pt-br.reactjs.org/docs/getting-started.html) - Biblioteca JavaScript
+* [Styled Components](https://styled-components.com/docs) - Biblioteca de estilização
 
 ## ✒️ Autores
 
